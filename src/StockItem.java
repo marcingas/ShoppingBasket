@@ -1,5 +1,3 @@
-import java.util.Comparator;
-
 public class StockItem implements Comparable<StockItem> {
     private final String name;
     private double price;
@@ -25,7 +23,7 @@ public class StockItem implements Comparable<StockItem> {
         return price;
     }
 
-    public int getQuantityStock() {
+    public int quantityInStock() {
         return quantityStock;
     }
 
