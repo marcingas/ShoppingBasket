@@ -12,16 +12,16 @@ public class StockList {
             StockItem inStock = list.getOrDefault(item.getName(),item);
             //check if already have quantities of this item, adjust the quantity:
             if(inStock != item){
-                item.adjustStock(inStock.quantityInStock());
+                item.adjustStock(inStock.quantityInStockModified());
             }
             list.put(item.getName(), item);
-            return item.quantityInStock();
+            return item.quantityInStockModified();
         }
         return 0;
     }
     public int sellStock(String itemName, int quantity){
         StockItem inStock = list.getOrDefault(itemName, null);
-        if((inStock != null) && (inStock.quantityInStock() >= quantity) && (quantity >0)){
+        if((inStock != null) && (inStock.quantityInStockModified() >= quantity) && (quantity >0)){
             inStock.adjustStock(-quantity);
             return quantity;
         }
@@ -30,9 +30,22 @@ public class StockList {
     public StockItem get(String key){
         return list.get(key);
     }
+
+    public Map<String, Double> PriceList(){
+        Map<String, Double>prices = new LinkedHashMap<>();
+        for(Map.Entry<String,StockItem>item : list.entrySet()){
+            prices.put(item.getKey(), item.getValue().getPrice());
+
+        }
+        return Collections.unmodifiableMap(prices);
+    }
     public Map<String, StockItem>Items(){
         return Collections.unmodifiableMap(list);
     }
+
+
+
+
 
     @Override
     public String toString() {
@@ -41,8 +54,8 @@ public class StockList {
         for(Map.Entry<String, StockItem>item : list.entrySet()){
             StockItem stockItem = item.getValue();
 
-            double itemValue = stockItem.getPrice() * stockItem.quantityInStock();
-            s = s + stockItem + ". There are " + stockItem.quantityInStock() + " in stock. Value of items: ";
+            double itemValue = stockItem.getPrice() * stockItem.quantityInStockModified();
+            s = s + stockItem + ". There are " + stockItem.quantityInStockModified() + " in stock. Value of items: ";
             s= s + String.format("%.2f",itemValue) + "\n";
             totalCost += itemValue;
         }
