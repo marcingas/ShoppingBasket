@@ -1,18 +1,18 @@
-public class StockItem implements Comparable<StockItem> {
+public class TowarNaMagazynie implements Comparable<TowarNaMagazynie> {
     private final String name;
     private double price;
-    private int quantityStock;
+    private int iloscNaMagazynie;
 
-    public StockItem(String name, double price) {
+    public TowarNaMagazynie(String name, double price) {
         this.name = name;
         this.price = price;
-        this.quantityStock = 0;
+        this.iloscNaMagazynie = 0;
     }
 
-    public StockItem(String name, double price, int quantityStock) {
+    public TowarNaMagazynie(String name, double price, int iloscMagazynowana) {
         this.name = name;
         this.price = price;
-        this.quantityStock = quantityStock;
+        this.iloscNaMagazynie = iloscMagazynowana;
     }
 
     public String getName() {
@@ -23,8 +23,8 @@ public class StockItem implements Comparable<StockItem> {
         return price;
     }
 
-    public int quantityInStock() {
-        return quantityStock;
+    public int IloscNaMagazynie() {
+        return iloscNaMagazynie;
     }
 
     public void setPrice(double price) {
@@ -32,10 +32,10 @@ public class StockItem implements Comparable<StockItem> {
             this.price = price;
         }
     }
-    public void adjustStock(int quantity){
-        int newQuantity = this.quantityStock + quantity;
+    public void KoretkaIlMagazyn(int quantity){
+        int newQuantity = this.iloscNaMagazynie + quantity;
         if(newQuantity>=0){
-            this.quantityStock = newQuantity;
+            this.iloscNaMagazynie = newQuantity;
         }
     }
 
@@ -48,7 +48,7 @@ public class StockItem implements Comparable<StockItem> {
         if(obj== null || (obj.getClass()!= this.getClass())){
             return false;
         }
-        String objName = ((StockItem)obj).getName();
+        String objName = ((TowarNaMagazynie)obj).getName();
         return this.name.equals(objName);
     }
 
@@ -58,13 +58,13 @@ public class StockItem implements Comparable<StockItem> {
     }
 
     @Override
-    public int compareTo(StockItem o) {
+    public int compareTo(TowarNaMagazynie towar) {
         System.out.println("Entering StockItem.compareTo");
-        if(this == o){
+        if(this == towar){
             return 0;
         }
-        if(o != null){
-            return this.name.compareTo(o.getName());
+        if(towar != null){
+            return this.name.compareTo(towar.getName());
         }
         throw new NullPointerException();
     }

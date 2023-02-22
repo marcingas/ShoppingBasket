@@ -1,31 +1,31 @@
 public class Main {
 
-    private static StockList stockList = new StockList();
+    private static ListaMagazynowa listaMagazynowa = new ListaMagazynowa();
     public static void main(String[] args) {
-        StockItem temp = new StockItem("bread", 0.86, 100);
-        stockList.addStock(temp);
-        temp = new StockItem("cake", 1.10,70);
-        stockList.addStock(temp);
-        temp = new StockItem("carToy", 12.10,200);
-        stockList.addStock(temp);
-        temp = new StockItem("chair", 62.0,10);
-        stockList.addStock(temp);
-        temp = new StockItem("cup", 0.50,200);
-        stockList.addStock(temp);
-        temp = new StockItem("cup", 0.45,10);
-        stockList.addStock(temp);
-        temp = new StockItem("door", 72.95,40);
-        stockList.addStock(temp);
-        temp = new StockItem("juice", 2.50,40);
-        stockList.addStock(temp);
-        temp = new StockItem("phone", 94.0,30);
-        stockList.addStock(temp);
-        temp = new StockItem("towel", 1.43,50);
-        stockList.addStock(temp);
-        temp = new StockItem("vase", 9.99,70);
-        stockList.addStock(temp);
-        System.out.println(stockList);
-        for(String s : stockList.Items().keySet()){
+        TowarNaMagazynie temp = new TowarNaMagazynie("bread", 0.86, 100);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("cake", 1.10,70);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("carToy", 12.10,200);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("chair", 62.0,10);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("cup", 0.50,200);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("cup", 0.45,10);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("door", 72.95,40);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("juice", 2.50,40);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("phone", 94.0,30);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("towel", 1.43,50);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        temp = new TowarNaMagazynie("vase", 9.99,70);
+        listaMagazynowa.dodajDoMagazynu(temp);
+        System.out.println(listaMagazynowa);
+        for(String s : listaMagazynowa.Towary().keySet()){
             System.out.println(s);
         }
         Basket marcinsBasket = new Basket("Marcin");
@@ -42,20 +42,24 @@ public class Main {
         sellItem(marcinsBasket, "bread",1);
         System.out.println("My basket is : " + marcinsBasket);
         System.out.println("Stock list after I bought stuff is: ");
-        System.out.println(stockList);
+        System.out.println(listaMagazynowa);
+
+        temp = new TowarNaMagazynie("pen",1.12);
+        listaMagazynowa.Towary().put(temp.getName(), temp);
+
 
 
 
 
     }
     public static int sellItem(Basket basket, String item, int quantity){
-        StockItem stockItem = stockList.get(item);
-        if(stockItem == null){
+        TowarNaMagazynie towarNaMagazynie = listaMagazynowa.get(item);
+        if(towarNaMagazynie == null){
             System.out.println("We don't sell " + item);
             return 0;
         }
-        if(stockList.sellStock(item,quantity) != 0){
-            basket.addToBasket(stockItem,quantity);
+        if(listaMagazynowa.sprzedajTowar(item,quantity) != 0){
+            basket.dodajDoKoszyka(towarNaMagazynie,quantity);
             return quantity;
         }
         return 0;
