@@ -20,12 +20,19 @@ public class StockList {
         return 0;
     }
     public int sellStock(String itemName, int quantity){
-        StockItem inStock = list.getOrDefault(itemName, null);
-        if((inStock != null) && (inStock.availableQuantity() >= quantity) && (quantity >0)){
-            inStock.adjustStock(-quantity);
-            return quantity;
+        StockItem inStock = list.get(itemName);
+        if((inStock != null) && (quantity > 0)){
+            return inStock.finaliseStock(quantity);
         }
         return 0;
+
+
+//        StockItem inStock = list.getOrDefault(itemName, null);
+//        if((inStock != null) && (inStock.availableQuantity() >= quantity) && (quantity >0)){
+//            inStock.adjustStock(-quantity);
+//            return quantity;
+//        }
+//        return 0;
     }
 
     public int reserveStock(String item, int quantity){
