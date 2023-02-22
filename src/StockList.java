@@ -12,16 +12,16 @@ public class StockList {
             StockItem inStock = list.getOrDefault(item.getName(),item);
             //check if already have quantities of this item, adjust the quantity:
             if(inStock != item){
-                item.adjustStock(inStock.quantityInStockModified());
+                item.adjustStock(inStock.availableQuantity());
             }
             list.put(item.getName(), item);
-            return item.quantityInStockModified();
+            return item.availableQuantity();
         }
         return 0;
     }
     public int sellStock(String itemName, int quantity){
         StockItem inStock = list.getOrDefault(itemName, null);
-        if((inStock != null) && (inStock.quantityInStockModified() >= quantity) && (quantity >0)){
+        if((inStock != null) && (inStock.availableQuantity() >= quantity) && (quantity >0)){
             inStock.adjustStock(-quantity);
             return quantity;
         }
@@ -54,8 +54,8 @@ public class StockList {
         for(Map.Entry<String, StockItem>item : list.entrySet()){
             StockItem stockItem = item.getValue();
 
-            double itemValue = stockItem.getPrice() * stockItem.quantityInStockModified();
-            s = s + stockItem + ". There are " + stockItem.quantityInStockModified() + " in stock. Value of items: ";
+            double itemValue = stockItem.getPrice() * stockItem.availableQuantity();
+            s = s + stockItem + ". There are " + stockItem.availableQuantity() + " in stock. Value of items: ";
             s= s + String.format("%.2f",itemValue) + "\n";
             totalCost += itemValue;
         }
