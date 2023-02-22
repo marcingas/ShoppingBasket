@@ -44,8 +44,8 @@ public class Main {
         System.out.println("Stock list after I bought stuff is: ");
         System.out.println(listaMagazynowa);
 
-        temp = new TowarNaMagazynie("pen",1.12);
-        listaMagazynowa.Towary().put(temp.getName(), temp);
+//        temp = new TowarNaMagazynie("pen",1.12);
+//        listaMagazynowa.Towary().put(temp.getName(), temp);
 
 
 
